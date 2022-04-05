@@ -20,6 +20,10 @@ with Masked Image Modeling for Object Detection</font></span>
 | Benchmarking-ViT-B | - | 50ep | [1024, 1024] LSJ(0.1-2) | 50.2 | 44.9 | 118.67M | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_50ep_LSJ_mae.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/benchmarking_mask_rcnn_base_FPN_50ep_LSJ_mae.pth) |
 | Benchmarking-ViT-B | - | 100ep | [1024, 1024] LSJ(0.1-2) | 50.4 | 44.9 | 118.67M | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.pth) |
 
+**Notes**:
+
+- Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
+
 ## Installation
 
 - Clone
@@ -34,8 +38,9 @@ conda create -n mimdet python=3.9
 conda activate mimdet
 ```
 
-* This repo is baed on [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), installation follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
-* This repo is baed on [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), installation follow [link](https://fastai.github.io/timmdocs/).
+* This repo is based on [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), installation follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
+* This repo is based on [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), installation follow [link](https://fastai.github.io/timmdocs/).
+* Install einops, follow [link](https://github.com/arogozhnikov/einops).
 
 ## Inference
 
