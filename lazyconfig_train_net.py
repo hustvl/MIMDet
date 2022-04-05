@@ -12,18 +12,24 @@ import logging
 
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import LazyConfig, instantiate
-from detectron2.engine import (AMPTrainer, SimpleTrainer,
-                               default_argument_parser, default_setup,
-                               default_writers, hooks, launch)
+from detectron2.engine import (
+    AMPTrainer,
+    SimpleTrainer,
+    default_argument_parser,
+    default_setup,
+    default_writers,
+    hooks,
+    launch,
+)
 from detectron2.engine.defaults import create_ddp_model
 from detectron2.evaluation import inference_on_dataset, print_csv_format
 from detectron2.utils import comm
 
-logger = logging.getLogger('detectron2')
+logger = logging.getLogger("detectron2")
 
 
 def do_test(cfg, model):
-    if 'evaluator' in cfg.dataloader:
+    if "evaluator" in cfg.dataloader:
         ret = inference_on_dataset(
             model,
             instantiate(cfg.dataloader.test),
@@ -53,8 +59,8 @@ def do_train(args, cfg):
                 ddp (dict)
     """
     model = instantiate(cfg.model)
-    logger = logging.getLogger('detectron2')
-    logger.info('Model:\n{}'.format(model))
+    logger = logging.getLogger("detectron2")
+    logger.info("Model:\n{}".format(model))
     model.to(cfg.train.device)
 
     cfg.optimizer.params.model = model
@@ -64,23 +70,25 @@ def do_train(args, cfg):
 
     model = create_ddp_model(model, **cfg.train.ddp)
     trainer = (AMPTrainer if cfg.train.amp.enabled else SimpleTrainer)(
-        model, train_loader, optim)
-    checkpointer = DetectionCheckpointer(
-        model,
-        cfg.train.output_dir,
-        trainer=trainer,
+        model, train_loader, optim
     )
-    trainer.register_hooks([
-        hooks.IterationTimer(),
-        hooks.LRScheduler(scheduler=instantiate(cfg.lr_multiplier)),
-        hooks.PeriodicCheckpointer(checkpointer, **cfg.train.checkpointer)
-        if comm.is_main_process() else None,
-        hooks.EvalHook(cfg.train.eval_period, lambda: do_test(cfg, model)),
-        hooks.PeriodicWriter(
-            default_writers(cfg.train.output_dir, cfg.train.max_iter),
-            period=cfg.train.log_period,
-        ) if comm.is_main_process() else None,
-    ])
+    checkpointer = DetectionCheckpointer(model, cfg.train.output_dir, trainer=trainer,)
+    trainer.register_hooks(
+        [
+            hooks.IterationTimer(),
+            hooks.LRScheduler(scheduler=instantiate(cfg.lr_multiplier)),
+            hooks.PeriodicCheckpointer(checkpointer, **cfg.train.checkpointer)
+            if comm.is_main_process()
+            else None,
+            hooks.EvalHook(cfg.train.eval_period, lambda: do_test(cfg, model)),
+            hooks.PeriodicWriter(
+                default_writers(cfg.train.output_dir, cfg.train.max_iter),
+                period=cfg.train.log_period,
+            )
+            if comm.is_main_process()
+            else None,
+        ]
+    )
 
     checkpointer.resume_or_load(cfg.train.init_checkpoint, resume=args.resume)
     if args.resume and checkpointer.has_checkpoint():
@@ -107,16 +115,16 @@ def main(args):
         do_train(args, cfg)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = default_argument_parser()
-    parser.add_argument('--node_rank', type=int, default=0)
-    parser.add_argument('--master_addr', default='')
-    parser.add_argument('--master_port', default='')
+    parser.add_argument("--node_rank", type=int, default=0)
+    parser.add_argument("--master_addr", default="")
+    parser.add_argument("--master_port", default="")
     args = parser.parse_args()
     args.machine_rank = args.node_rank
     if args.master_addr or args.master_port:
         assert args.master_addr and args.master_port
-        args.dist_url = f'tcp://{args.master_addr}:{args.master_port}'
+        args.dist_url = f"tcp://{args.master_addr}:{args.master_port}"
     print(args)
     launch(
         main,
@@ -124,5 +132,5 @@ if __name__ == '__main__':
         num_machines=args.num_machines,
         machine_rank=args.machine_rank,
         dist_url=args.dist_url,
-        args=(args, ),
+        args=(args,),
     )
