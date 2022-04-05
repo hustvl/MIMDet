@@ -11,7 +11,19 @@ with Masked Image Modeling for Object Detection</font></span>
 ## Models and Main Results
 
 
-## Requirements
+## Installation
+
+- Clone
+```
+git clone https://github.com/hustvl/MIMDet
+cd MIMDet
+```
+
+- Create a conda virtual environment and activate it:
+```
+conda create -n mimdet python=3.9
+conda activate mimdet
+```
 
 * This repo is baed on [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), installation follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
 * This repo is baed on [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), installation follow [link](https://fastai.github.io/timmdocs/).
