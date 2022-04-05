@@ -5,8 +5,11 @@ with Masked Image Modeling for Object Detection</font></span>
 </div>
 
 
-## Introduction
+PyTorch training code and pretrained models for **MIMDet** (**M**asked **I**mage **M**odeling for **Det**ection).
+* MIMDet is a simple framekwork that enables a MIM pretrained vanilla ViT for object detection.
+* Obtaining **51.5 box AP** and **46.0 mask AP** on COCO while converging 2.8× faster.
 
+![MIMDet](MIMDet.png)
 
 ## Models and Main Results
 
