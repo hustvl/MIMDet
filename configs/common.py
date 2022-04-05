@@ -1,4 +1,5 @@
 from typing import Dict, List, Optional
+from omegaconf import DictConfig
 
 import torch
 from detectron2.config import LazyCall as L
@@ -169,4 +170,9 @@ lr_multiplier = L(WarmupParamScheduler)(
     ),
     warmup_length=500 / train['max_iter'],
     warmup_factor=0.067,
+)
+
+mae_checkpoint = DictConfig(
+    content={"path": "pretrained/mae_pretrain_vit_base_full.pth"},
+    flags={"allow_objects": True}
 )

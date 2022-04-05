@@ -1,5 +1,4 @@
 from functools import partial
-from omegaconf import DictConfig
 import torch
 import torch.nn as nn
 
@@ -23,12 +22,7 @@ from models import MIMDetBackbone, MIMDetDecoder, MIMDetEncoder
 
 from ..coco import dataloader
 from ..common import (GeneralizedRCNNImageListForward,
-                      get_fpn_model_parameters, lr_multiplier, train)
-
-mae_checkpoint = DictConfig(
-    content={"path": "pretrained/mae_pretrain_vit_base_full.pth"},
-    flags={"allow_objects": True}
-)
+                      get_fpn_model_parameters, lr_multiplier, train, mae_checkpoint)
 
 model = L(GeneralizedRCNNImageListForward)(
     lsj_postprocess=False,
@@ -44,7 +38,7 @@ model = L(GeneralizedRCNNImageListForward)(
                 mlp_ratio=4.0,
                 dpr=0.1,
                 norm_layer=partial(nn.LayerNorm, eps=1e-5),
-                pretrained='${.....mae_checkpoint.path}',
+                pretrained='${mae_checkpoint.path}',
                 checkpointing=True,
             ),
             decoder=L(MIMDetDecoder)(
