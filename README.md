@@ -53,9 +53,9 @@ conda create -n mimdet python=3.9
 conda activate mimdet
 ```
 
-* Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
-* Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [link](https://fastai.github.io/timmdocs/).
-* Install [`einops`](https://github.com/arogozhnikov/einops), follow [link](https://github.com/arogozhnikov/einops#installation--).
+* Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [d2 doc](https://detectron2.readthedocs.io/tutorials/install.html).
+* Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [timm doc](https://fastai.github.io/timmdocs/).
+* Install [`einops`](https://github.com/arogozhnikov/einops), follow [einops repo](https://github.com/arogozhnikov/einops#installation--).
 
 ## Inference
 
@@ -69,6 +69,7 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 
 ## Training
 
+Downloading pretrained MAE full pretrained [ViT-B Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base_full.pth) and [ViT-L Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_large_full.pth), follow [MAE repo-issues-8](https://github.com/facebookresearch/mae/issues/8).
 ```
 # single-machine training
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> mae_checkpoint.path=<MAE_MODEL_PATH>
@@ -76,6 +77,9 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 # multi-machine training
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --num-machines <MACHINE_NUM> --master_addr <MASTER_ADDR> --master_port <MASTER_PORT> mae_checkpoint.path=<MAE_MODEL_PATH>
 ```
+
+## Acknowledgement
+This project is based on [MAE](https://github.com/facebookresearch/mae), [Detectron2](https://github.com/facebookresearch/detectron2) and [timm](https://github.com/rwightman/pytorch-image-models). Thanks for their wonderful works.
 
 ## License
 
