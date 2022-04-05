@@ -10,6 +10,15 @@ with Masked Image Modeling for Object Detection</font></span>
 
 ## Models and Main Results
 
+### Mask R-CNN
+| Model | Sample Ratio | Schedule | Aug | box mAP | mask mAP | #params | config | model |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| MIMDet-ViT-B | 0.25 | 3x | [480-800, 1333] w/crop | 49.9 | 44.7 | | [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_mr_0p25_800_1333_4xdec_coco_3x.py) | |
+| MIMDet-ViT-B | 0.5 | 3x | [480-800, 1333] w/crop | 51.5 | 46.0 | | [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_mr_0p5_800_1333_4xdec_coco_3x.py) | |
+| MIMDet-ViT-L | 0.5 | 3x | [480-800, 1333] w/crop | 53.3 | 47.5 | | [config](configs/mimdet/mimdet_vit_large_mask_rcnn_fpn_mr_0p5_800_1333_4xdec_coco_3x.py) | |
+| Benchmarking-ViT-B | - | 25ep | [1024, 1024] LSJ(0.1-2) | 48.0 | 43.0 | | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_25ep_LSJ_mae.py) | |
+| Benchmarking-ViT-B | - | 50ep | [1024, 1024] LSJ(0.1-2) | 50.2 | 44.9 | | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_50ep_LSJ_mae.py) | |
+| Benchmarking-ViT-B | - | 100ep | [1024, 1024] LSJ(0.1-2) | 50.4 | 44.9 | | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.py) | |
 
 ## Installation
 
