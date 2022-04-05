@@ -26,6 +26,14 @@ with Masked Image Modeling for Object Detection</font></span>
 
 ## Installation
 
+### Prerequisites
+* Linux
+* Python 3.7+
+* CUDA 10.2+
+* GCC 5+
+
+### Prepare
+
 - Clone
 ```
 git clone https://github.com/hustvl/MIMDet.git
@@ -38,9 +46,9 @@ conda create -n mimdet python=3.9
 conda activate mimdet
 ```
 
-* This repo is based on [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), installation follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
-* This repo is based on [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), installation follow [link](https://fastai.github.io/timmdocs/).
-* Install einops, follow [link](https://github.com/arogozhnikov/einops).
+* Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [link](https://detectron2.readthedocs.io/tutorials/install.html).
+* Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [link](https://fastai.github.io/timmdocs/).
+* Install [`einops`](https://github.com/arogozhnikov/einops), follow [link](https://github.com/arogozhnikov/einops#installation--).
 
 ## Inference
 
