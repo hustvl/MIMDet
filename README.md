@@ -31,14 +31,14 @@ conda activate mimdet
 ## Inference
 
 ```
-python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<CHECKPOINT_PATH>
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH>
 ```
 
 ## Training
 
 ```
 # single-machine training
-python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM>
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> mae_checkpoint.path=<MAE_MODEL_PATH>
 
 # multi-machine training
 ```
