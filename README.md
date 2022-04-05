@@ -15,7 +15,7 @@ with Masked Image Modeling for Object Detection</font></span>
 
 - Clone
 ```
-git clone https://github.com/hustvl/MIMDet
+git clone https://github.com/hustvl/MIMDet.git
 cd MIMDet
 ```
 
