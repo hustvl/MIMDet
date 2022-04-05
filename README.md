@@ -31,7 +31,11 @@ conda activate mimdet
 ## Inference
 
 ```
+# inference
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<CHECKPOINT_PATH>
+
+# inference with 100% sample ratio
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<CHECKPOINT_PATH> model.backbone.bottom_up.sample_ratio=1.0
 ```
 
 ## Training
@@ -41,6 +45,7 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM>
 
 # multi-machine training
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --num-machines <MACHINE_NUM> --master_addr <MASTER_ADDR> --master_port <MASTER_PORT>
 ```
 
 ## License
