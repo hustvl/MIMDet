@@ -164,6 +164,6 @@ lr_multiplier = L(WarmupParamScheduler)(
 )
 
 mae_checkpoint = DictConfig(
-    content={"path": "pretrained/mae_pretrain_vit_base_full.pth"},
+    content={"path": None},
     flags={"allow_objects": True},
 )
