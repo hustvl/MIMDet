@@ -1,19 +1,32 @@
 <div align="center">
 <h1>MIMDet &#127917;</h1>
-<span><font size="4", >Taming and Unleashing Vanilla Vision Transformer
-with Masked Image Modeling for Object Detection</font></span>
+<h3>Unleashing Vanilla Vision Transformer
+with Masked Image Modeling for Object Detection</h3>
+
+
+[Yuxin Fang](https://bit.ly/YuxinFang_GoogleScholar)<sup>1</sup> \*, [Shusheng Yang](https://scholar.google.com/citations?user=v6dmW5cntoMC&hl=en)<sup>1</sup> \*, [Shijie Wang](https://github.com/simonJJJ)<sup>1</sup> \*, [Yixiao Ge](https://geyixiao.com/)<sup>2</sup>, [Ying Shan](https://scholar.google.com/citations?user=4oXBp9UAAAAJ&hl=en)<sup>2</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>1 :email:</sup>,
+ 
+<sup>1</sup> [School of EIC, HUST](http://eic.hust.edu.cn/English/Home.htm), <sup>2</sup> ARC Lab, Tencent PCG.
+
+(\*) equal contribution, (<sup>:email:</sup>) corresponding author.
+
+
 </div>
+
 
 
 ## Introduction
 
-PyTorch training code and pretrained models for **MIMDet** (**M**asked **I**mage **M**odeling for **Det**ection).
-* MIMDet is a simple framekwork that enables a MIM pretrained vanilla ViT for object detection.
-* Obtaining **51.5 box AP** and **46.0 mask AP** on COCO while converging 2.8× faster.
 
 <p align="center">
 <img src="MIMDet.png" width=80%>
 </p>
+
+This repo provides code and pretrained models for **MIMDet** (**M**asked **I**mage **M**odeling for **Det**ection).
+* MIMDet is a simple framekwork that enables a MIM pretrained vanilla ViT to perform high-performance object-level understanding, e.g, object detection and instance segmentation.
+* In MIMDet, a MIM pre-trained vanilla ViT encoder can work surprisingly well in the challenging object-level recognition scenario even with randomly sampled *partial* observations, e.g., only 25%~50% of the input embeddings.
+* In order to construct multi-scale representations for object detection, a *randomly initialized* compact convolutional stem supplants the pre-trained large kernel patchify stem, and its intermediate features can naturally serve as the higher resolution inputs of a feature pyramid without upsampling. While the pre-trained ViT is only regarded as the third-stage of our detector's backbone instead of the whole feature extractor, resulting in a ConvNet-ViT *hybrid* architecture.
+* MIMDet-Base obtains **51.5 box AP** and **46.0 mask AP** on COCO.
 
 ## Models and Main Results
 
@@ -30,6 +43,7 @@ PyTorch training code and pretrained models for **MIMDet** (**M**asked **I**mage
 **Notes**:
 
 - Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
+- The configuration & results of MIMDet-ViT-L are still under-tuned.
 
 ## Installation
 
