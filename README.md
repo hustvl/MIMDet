@@ -70,6 +70,7 @@ conda activate mimdet
 * Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [d2 doc](https://detectron2.readthedocs.io/tutorials/install.html).
 * Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [timm doc](https://fastai.github.io/timmdocs/).
 * Install [`einops`](https://github.com/arogozhnikov/einops), follow [einops repo](https://github.com/arogozhnikov/einops#installation--).
+* Prepare MS-COCO dataset, follow [d2_doc](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html).
 
 ## Inference
 
