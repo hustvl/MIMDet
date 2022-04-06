@@ -4,6 +4,7 @@ from .mimdet_vit_base_mask_rcnn_fpn_mr_0p5_800_1333_4xdec_coco_3x import (
     model,
     optimizer,
     train,
+    mae_checkpoint,
 )
 
 model.backbone.bottom_up.encoder.embed_dim = 1024
