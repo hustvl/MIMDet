@@ -10,6 +10,7 @@ with Masked Image Modeling for Object Detection</h3>
 
 (\*) equal contribution, (<sup>:email:</sup>) corresponding author.
 
+*ArXiv Preprint ([arXiv 2204.02964](https://arxiv.org/abs/2204.02964))*
 
 </div>
 
@@ -99,3 +100,16 @@ This project is based on [MAE](https://github.com/facebookresearch/mae), [Detect
 ## License
 
 MIMDet is released under the [MIT License](LICENSE).
+
+## Citation
+
+If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil: :)
+
+```BibTeX
+@article{MIMDet,
+  title={Unleashing Vanilla Vision Transformer with Masked Image Modeling for Object Detection},
+  author={Fang, Yuxin and Yang, Shusheng and Wang, Shijie and Ge, Yixiao and Shan, Ying and Wang, Xinggang},
+  journal={arXiv preprint arXiv:2204.02964},
+  year={2022}
+}
+```
