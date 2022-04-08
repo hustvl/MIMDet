@@ -27,7 +27,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 * MIMDet is a simple framekwork that enables a MIM pretrained vanilla ViT to perform high-performance object-level understanding, e.g, object detection and instance segmentation.
 * In MIMDet, a MIM pre-trained vanilla ViT encoder can work surprisingly well in the challenging object-level recognition scenario even with randomly sampled *partial* observations, e.g., only 25%~50% of the input embeddings.
 * In order to construct multi-scale representations for object detection, a *randomly initialized* compact convolutional stem supplants the pre-trained large kernel patchify stem, and its intermediate features can naturally serve as the higher resolution inputs of a feature pyramid without upsampling. While the pre-trained ViT is only regarded as the third-stage of our detector's backbone instead of the whole feature extractor, resulting in a ConvNet-ViT *hybrid* architecture.
-* MIMDet-Base obtains **51.5 box AP** and **46.0 mask AP** on COCO.
+* MIMDet w/ ViT-Base & Mask R-CNN FPN obtains **51.5 box AP** and **46.0 mask AP** on COCO.
 
 ## Models and Main Results
 
@@ -42,7 +42,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 | Benchmarking-ViT-B | - | 100ep | [1024, 1024] LSJ(0.1-2) | 50.4 | 44.9 | 118.67M | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.json) |
 
 **Notes**:
-
+  
 - Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
 - The configuration & results of MIMDet-ViT-L are still under-tuned.
 
@@ -80,7 +80,7 @@ conda activate mimdet
 # inference
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH>
 
-# inference with 100% sample ratio
+# inference with 100% sample ratio (see Table 2 in our paper for a detailed analysis)
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH> model.backbone.bottom_up.sample_ratio=1.0
 ```
 
