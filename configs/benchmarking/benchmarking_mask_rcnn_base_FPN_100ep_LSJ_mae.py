@@ -136,9 +136,9 @@ optimizer = L(torch.optim.AdamW)(
             "relative_position_bias_table": {"weight_decay": 0.0},
         },
     ),
-    lr=1.6e-4,
+    lr=8e-5,
     betas=(0.9, 0.999),
-    weight_decay=0.2,
+    weight_decay=0.1,
 )
 
 lr_multiplier = L(WarmupParamScheduler)(
@@ -165,6 +165,7 @@ train = dict(
 # resize_and_crop_image in:
 # https://github.com/tensorflow/tpu/blob/b24729de804fdb751b06467d3dce0637fa652060/models/official/detection/utils/input_utils.py#L127  # noqa: E501, B950
 image_size = 1024
+dataloader.train.total_batch_size = 64
 dataloader.train.mapper.augmentations = [
     L(T.ResizeScale)(
         min_scale=0.1, max_scale=2.0, target_height=image_size, target_width=image_size
