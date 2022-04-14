@@ -43,7 +43,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 
 **Notes**:
 
-- We also provide a [training config]() w/ sample ratio = 0.25 for **8x GPUs (bsz = 16)** environment to make our work more accessible to the community. The results (49.9 Box AP / 44.6 Mask AP) match our default settings (49.9 Box AP / 44.7 Mask AP), and are better than the Swin-Base counterpart (49.2 Box AP / 43.5 Mask AP) under a similar total training time (~2d6h).
+- We also provide a [training config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x_bs16.py) w/ sample ratio = 0.25 for **8x GPUs (bsz = 16)** environment to make our work more accessible to the community. The results (49.9 Box AP / 44.6 Mask AP) match our default settings (49.9 Box AP / 44.7 Mask AP), and are better than the Swin-Base counterpart (49.2 Box AP / 43.5 Mask AP) under a similar total training time (~2d6h).
 - Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
 - The configuration & results of MIMDet-ViT-L are still under-tuned.
 
