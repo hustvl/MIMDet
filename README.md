@@ -34,7 +34,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 ### Mask R-CNN
 | Model | Sample Ratio | Schedule | Aug | box mAP | mask mAP | #params | config | model/log |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| MIMDet-ViT-B | 0.25 | 3x | [480-800, 1333] w/crop | 49.9 | 44.7 | 127.56M | [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.json) |
+| MIMDet-ViT-B | 0.25 | 3x | [480-800, 1333] w/crop | 49.9 / 49.9 (8x GPUs) | 44.7 / 44.6 (8x GPUs) | 127.56M | [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.py) / [config]() (8x GPUs)| [github](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.json) |
 | MIMDet-ViT-B | 0.5 | 3x | [480-800, 1333] w/crop | 51.5 | 46.0 | 127.56M | [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.json) |
 | MIMDet-ViT-L | 0.5 | 3x | [480-800, 1333] w/crop | 53.3 | 47.5 | 345.27M | [config](configs/mimdet/mimdet_vit_large_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_large_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_large_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.json) |
 | Benchmarking-ViT-B | - | 25ep | [1024, 1024] LSJ(0.1-2) | 48.0 | 43.0 | 118.67M | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_25ep_LSJ_mae.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/benchmarking_mask_rcnn_base_FPN_25ep_LSJ_mae.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/benchmarking_mask_rcnn_base_FPN_25ep_LSJ_mae.json) |
@@ -42,7 +42,8 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 | Benchmarking-ViT-B | - | 100ep | [1024, 1024] LSJ(0.1-2) | 50.4 | 44.9 | 118.67M | [config](configs/benchmarking/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.py) | [github](https://github.com/hustvl/storage/releases/download/v1.0.0/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.pth)/[log](https://github.com/hustvl/Storage/releases/download/v1.0.1/benchmarking_mask_rcnn_base_FPN_100ep_LSJ_mae.json) |
 
 **Notes**:
-  
+
+- We also provide a [training config]() w/ sample ratio = 0.25 for **8x GPUs (bsz = 16)** environment to make our work more accessible to the community. The results (49.9 Box AP / 44.6 Mask AP) match our default settings (49.9 Box AP / 44.7 Mask AP), and are better than the Swin-Base counterpart (49.2 Box AP / 43.5 Mask AP) under a similar total training time (~2d6h).
 - Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
 - The configuration & results of MIMDet-ViT-L are still under-tuned.
 
@@ -86,7 +87,7 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 
 ## Training
 
-Downloading MAE full pretrained [ViT-B Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base_full.pth) and [ViT-L Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_large_full.pth), follow [MAE repo-issues-8](https://github.com/facebookresearch/mae/issues/8).
+Downloading MAE **full pretrained** (including the decoder) [ViT-B Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base_full.pth) and [ViT-L Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_large_full.pth), follow [MAE repo-issues-8](https://github.com/facebookresearch/mae/issues/8).
 ```
 # single-machine training
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> mae_checkpoint.path=<MAE_MODEL_PATH>
