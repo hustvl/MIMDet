@@ -87,7 +87,7 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 
 ## Training
 
-Downloading the **full** MAE pretrained (including the decoder) [ViT-B Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base_full.pth) and [ViT-L Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_large_full.pth), follow [MAE repo-issues-8](https://github.com/facebookresearch/mae/issues/8).
+Download the ***full*** MAE pretrained (including the decoder) [ViT-B Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base_full.pth) and [ViT-L Model](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_large_full.pth) checkpoint. See [MAE repo-issues-8](https://github.com/facebookresearch/mae/issues/8).
 ```
 # single-machine training
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> mae_checkpoint.path=<MAE_MODEL_PATH>
