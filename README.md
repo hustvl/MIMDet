@@ -32,7 +32,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 ## Models and Main Results
 
 ### Mask R-CNN
-| <sub>Model | <sub>Sample Ratio | <sub>Schedule | <sub>Aug | <sub>box mAP | <sub>mask mAP | <sub>#params | <sub>config | <sub>model / log |
+| <sub>Model | <sub>Sample Ratio | <sub>Schedule | <sub>Aug | <sub>Box AP | <sub>Mask AP | <sub>#params | <sub>config | <sub>model / log |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | <sub>MIMDet-ViT-B | <sub>0.25 | <sub>3x | <sub>[480-800, 1333] w/crop | <sub>49.9 / 49.9 (8x GPUs) | <sub>44.7 / 44.6 (8x GPUs) | <sub>127.56M | <sub>[config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.py) / [config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x_bs16.py) (8x GPUs)| <sub>[model](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.pth) / [log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x.json), [model](https://github.com/hustvl/Storage/releases/download/v1.1.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x_bs16.pth) / [log](https://github.com/hustvl/Storage/releases/download/v1.1.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x_bs16.json) (8x GPUs) |
 | <sub>MIMDet-ViT-B | <sub>0.5 | <sub>3x | <sub>[480-800, 1333] w/crop | <sub>51.5 | <sub>46.0 | <sub>127.56M | <sub>[config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.py) | <sub>[model](https://github.com/hustvl/storage/releases/download/v1.0.0/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.pth) / [log](https://github.com/hustvl/Storage/releases/download/v1.0.1/mimdet_vit_base_mask_rcnn_fpn_sr_0p5_800_1333_4xdec_coco_3x.json) |
@@ -43,6 +43,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 
 **Notes**:
 
+- The Box AP & Mask AP in the table above is obtained w/ sample ratio = 1.0, which is higher than the training sample ratio (0.25 or 0.5). Our MIMDet can benefit from lower sample ratio during training for better efficiency, as well as higher sample ratio during inference for better accuracy. Please refer to Table 2 in our paper for a detailed analysis.
 - We also provide a [training config](configs/mimdet/mimdet_vit_base_mask_rcnn_fpn_sr_0p25_800_1333_4xdec_coco_3x_bs16.py) w/ sample ratio = 0.25 for **8x GPUs (bsz = 16)** environment to make our work more accessible to the community. The results (49.9 Box AP / 44.6 Mask AP) match our default settings (49.9 Box AP / 44.7 Mask AP), and are better than the Swin-Base counterpart (49.2 Box AP / 43.5 Mask AP) under a similar total training time (~2d6h).
 - Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
 - The configuration & results of MIMDet-ViT-L are still under-tuned.
