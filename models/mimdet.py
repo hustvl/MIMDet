@@ -238,7 +238,7 @@ class MIMDetEncoder(nn.Module):
             for blk in self.blocks:
                 x = blk(x)
         x = self.norm(x)
-        outputs[-1] = x
+        outputs.append(x)
         x = outputs
 
         return x, ids_restore, (H, W)
@@ -262,10 +262,11 @@ class MIMDetDecoder(nn.Module):
         super().__init__()
         self.checkpointing = checkpointing
         self.decoder_embed = nn.Linear(embed_dim, decoder_embed_dim, bias=True)
+        self.conv_feat_proj = nn.Linear(embed_dim, decoder_embed_dim, bias=True)
 
         self.grid_size = (img_size // patch_size, img_size // patch_size)
         self.num_patches = self.grid_size[0] * self.grid_size[1]
-        self.mask_token = nn.Parameter(torch.zeros(1, 1, decoder_embed_dim))
+        # self.mask_token = nn.Parameter(torch.zeros(1, 1, decoder_embed_dim))
         self.decoder_pos_embed = nn.Parameter(
             torch.zeros(1, self.num_patches + 1, decoder_embed_dim), requires_grad=False
         )
@@ -328,11 +329,14 @@ class MIMDetDecoder(nn.Module):
             nn.init.constant_(m.bias, 0)
             nn.init.constant_(m.weight, 1.0)
 
-    def forward(self, x, ids_restore, new_size):
+    def forward(self, x, ids_restore, new_size, conv_feats):
         x = self.decoder_embed(x)
         B, L, C = x.shape
-        mask_tokens = self.mask_token.repeat(x.shape[0], ids_restore.shape[1] - L, 1)
-        x_ = torch.cat([x, mask_tokens], dim=1)
+        conv_feats = conv_feats.flatten(2).permute(0, 2, 1)
+        conv_feats = self.conv_feat_proj(conv_feats)
+        ids_shuffle = torch.argsort(ids_restore, dim=1)
+        conv_feats = torch.gather(conv_feats, dim=1, index=ids_shuffle.unsqueeze(-1).repeat(1, 1, C))
+        x_ = torch.cat([x, conv_feats[:, L:, :]], dim=1)
         x = torch.gather(
             x_, dim=1, index=ids_restore.unsqueeze(-1).repeat(1, 1, C)
         )  # unshuffle
@@ -376,11 +380,11 @@ class MIMDetBackbone(Backbone):
 
     def forward(self, x):
         latent, ids_restore, new_size = self.encoder(x, self.sample_ratio)
-        latent[-1] = self.decoder(latent[-1], ids_restore, new_size)
+        latent[-1] = self.decoder(latent[-1], ids_restore, new_size, latent[-2])
         return {
             "c2": latent[0],
             "c3": latent[1],
-            "c4": latent[2],
+            "c4": latent[-1],
             "c5": F.max_pool2d(latent[-1], 2),
         }
 
