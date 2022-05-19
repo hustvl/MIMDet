@@ -36,7 +36,7 @@ model = L(GeneralizedRCNNImageListForward)(
     backbone=L(FPN)(
         bottom_up=L(MIMDetBackbone)(
             encoder=L(MIMDetEncoder)(
-                img_size=224,
+                img_size=800,
                 patch_size=16,
                 in_chans=3,
                 embed_dim=768,
@@ -135,11 +135,11 @@ optimizer = L(torch.optim.AdamW)(
         # the optimizer.
         weight_decay=0.1,
         weight_decay_norm=0.0,
-        base_lr=2e-5,
+        base_lr="${..lr}",
         skip_list=("pos_embed", "decoder_pos_embed"),
         multiplier=2.0,
     ),
-    lr=2e-5,
+    lr=8e-5,
     betas=(0.9, 0.999),
     weight_decay=0.1,
 )
