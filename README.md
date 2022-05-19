@@ -27,7 +27,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 * MIMDet is a simple framekwork that enables a MIM pretrained vanilla ViT to perform high-performance object-level understanding, e.g, object detection and instance segmentation.
 * In MIMDet, a MIM pre-trained vanilla ViT encoder can work surprisingly well in the challenging object-level recognition scenario even with randomly sampled *partial* observations, e.g., only 25%~50% of the input embeddings.
 * In order to construct multi-scale representations for object detection, a *randomly initialized* compact convolutional stem supplants the pre-trained large kernel patchify stem, and its intermediate features can naturally serve as the higher resolution inputs of a feature pyramid without upsampling. While the pre-trained ViT is only regarded as the third-stage of our detector's backbone instead of the whole feature extractor, resulting in a ConvNet-ViT *hybrid* architecture.
-* MIMDet w/ ViT-Base & Mask R-CNN FPN obtains **51.5 box AP** and **46.0 mask AP** on COCO.
+* MIMDet w/ ViT-Base & Mask R-CNN FPN obtains **51.7 box AP** and **46.2 mask AP** on COCO. With ViT-L, MIMDet achieves **54.3 box AP** and **48.2 mask AP**.
 
 ## Models and Main Results
 
