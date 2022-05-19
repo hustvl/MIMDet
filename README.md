@@ -42,9 +42,8 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 
 **Notes**:
 
-- The Box AP & Mask AP in the table above is obtained w/ sample ratio = 1.0, which is higher than the training sample ratio (0.25 or 0.5). Our MIMDet can benefit from lower sample ratio during training for better efficiency, as well as higher sample ratio during inference for better accuracy. Please refer to Table 2 in our paper for a detailed analysis.
-- Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429)
-- The configuration & results of MIMDet-ViT-L are still under-tuned.
+- The Box AP & Mask AP in the table above is obtained w/ sample ratio = 1.0, which is higher than the training sample ratio (0.25 or 0.5). Our MIMDet can benefit from lower sample ratio during training for better efficiency, as well as higher sample ratio during inference for better accuracy. Please refer to our paper for detailed analysis.
+- Benchmarking-ViT-B is an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429).
 
 ## Installation
 
