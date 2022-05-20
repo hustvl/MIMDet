@@ -10,11 +10,17 @@ with Masked Image Modeling for Object Detection</h3>
 
 (\*) equal contribution, (<sup>:email:</sup>) corresponding author.
 
-*ArXiv Preprint ([arXiv 2204.02964](https://arxiv.org/abs/2204.02964))*
+ArXiv Preprint ([arXiv 2204.02964](https://arxiv.org/abs/2204.02964))
 
 </div>
 
+# 
 
+### News
+
+* **`19 May, 2022`:** We update our [preprint](https://arxiv.org/abs/2204.02964v2) on ArXiv with stronger results and more analysis. Code & models are also updated in the [`main`](https://github.com/hustvl/MIMDet/tree/main) branch. For our previous results (code & models), please refer to the [`v1.0.0`](https://github.com/hustvl/MIMDet/tree/v1.0.0) branch.
+
+* **`6 Apr, 2022`:** Code & models are released!
 
 ## Introduction
 
