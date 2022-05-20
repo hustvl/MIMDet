@@ -34,6 +34,7 @@ This repo provides code and pretrained models for **MIMDet** (**M**asked **I**ma
 * In MIMDet, a MIM pre-trained vanilla ViT encoder can work surprisingly well in the challenging object-level recognition scenario even with randomly sampled *partial* observations, e.g., only 25%~50% of the input embeddings.
 * In order to construct multi-scale representations for object detection, a *randomly initialized* compact convolutional stem supplants the pre-trained large kernel patchify stem, and its intermediate features can naturally serve as the higher resolution inputs of a feature pyramid without upsampling. While the pre-trained ViT is only regarded as the third-stage of our detector's backbone instead of the whole feature extractor, resulting in a ConvNet-ViT *hybrid* architecture.
 * MIMDet w/ ViT-Base & Mask R-CNN FPN obtains **51.7 box AP** and **46.2 mask AP** on COCO. With ViT-L, MIMDet achieves **54.3 box AP** and **48.2 mask AP**.
+* We also provide an unofficial implementation of [Benchmarking Detection Transfer Learning with Vision Transformers](https://arxiv.org/abs/2111.11429) that successfully reproduces its reported results.
 
 ## Models and Main Results
 
@@ -67,7 +68,20 @@ git clone https://github.com/hustvl/MIMDet.git
 cd MIMDet
 ```
 
-- Dataset
+
+- Create a conda virtual environment and activate it:
+```
+conda create -n mimdet python=3.9
+conda activate mimdet
+```
+
+* Install `torch==1.9.0` and `torchvision==0.10.0`
+* Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [d2 doc](https://detectron2.readthedocs.io/tutorials/install.html).
+* Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [timm doc](https://fastai.github.io/timmdocs/).
+* Install [`einops`](https://github.com/arogozhnikov/einops), follow [einops repo](https://github.com/arogozhnikov/einops#installation--).
+* Prepare [`COCO`](https://cocodataset.org/#home) dataset, follow [d2 doc](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html).
+
+### Dataset
 
 MIMDet is built upon ```detectron2```, so please organize dataset directory in detectron2's manner. We refer users to [```detectron2```](https://github.com/facebookresearch/detectron2) for detailed instructions. The overall hierachical structure is illustrated as following:
 ```
@@ -82,27 +96,6 @@ MIMDet
 ├── ...
 ```
 
-- Create a conda virtual environment and activate it:
-```
-conda create -n mimdet python=3.9
-conda activate mimdet
-```
-
-* Install `torch==1.9.0` and `torchvision==0.10.0`
-* Install [`Detectron2==0.6`](https://github.com/facebookresearch/detectron2), follow [d2 doc](https://detectron2.readthedocs.io/tutorials/install.html).
-* Install [`timm==0.4.12`](https://github.com/rwightman/pytorch-image-models), follow [timm doc](https://fastai.github.io/timmdocs/).
-* Install [`einops`](https://github.com/arogozhnikov/einops), follow [einops repo](https://github.com/arogozhnikov/einops#installation--).
-* Prepare [`COCO`](https://cocodataset.org/#home) dataset, follow [d2 doc](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html).
-
-## Inference
-
-```
-# inference
-python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH>
-
-# inference with 100% sample ratio (see Table 2 in our paper for a detailed analysis)
-python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH> model.backbone.bottom_up.sample_ratio=1.0
-```
 
 ## Training
 
@@ -113,6 +106,16 @@ python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> 
 
 # multi-machine training
 python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --num-machines <MACHINE_NUM> --master_addr <MASTER_ADDR> --master_port <MASTER_PORT> mae_checkpoint.path=<MAE_MODEL_PATH>
+```
+
+## Inference
+
+```
+# inference
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH>
+
+# inference with 100% sample ratio (please refer to our paper for detailed analysis)
+python lazyconfig_train_net.py --config-file <CONFIG_FILE> --num-gpus <GPU_NUM> --eval-only train.init_checkpoint=<MODEL_PATH> model.backbone.bottom_up.sample_ratio=1.0
 ```
 
 ## Acknowledgement
