@@ -169,10 +169,8 @@ dataloader.test.mapper.augmentations = [
     L(T.ResizeShortestEdge)(short_edge_length=800, max_size=1333),
 ]
 
-# batch size & schedules
+# batch size, lr & schedules
 dataloader.train.total_batch_size = 64
-optimizer.params.base_lr *= 64 / 16
-optimizer.lr *= 64 / 16
 train.checkpointer.period = int(120000 / 64)
 train.eval_period = int(120000 / 64)
 train.max_iter = int(120000 / 64 * 36)
