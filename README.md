@@ -10,7 +10,7 @@ with Masked Image Modeling for Object Detection</h3>
 
 (\*) equal contribution, (<sup>:email:</sup>) corresponding author.
 
-ArXiv Preprint ([arXiv 2204.02964](https://arxiv.org/abs/2204.02964))
+**ICCV 2023** [[paper](https://arxiv.org/abs/2204.02964)]
 
 </div>
 
