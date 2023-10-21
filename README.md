@@ -10,7 +10,7 @@ with Masked Image Modeling for Object Detection</h3>
 
 (\*) equal contribution, (<sup>:email:</sup>) corresponding author.
 
-**ICCV 2023** [[paper](https://arxiv.org/abs/2204.02964)]
+**ICCV 2023** [[paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Fang_Unleashing_Vanilla_Vision_Transformer_with_Masked_Image_Modeling_for_Object_ICCV_2023_paper.pdf)]
 
 </div>
 
